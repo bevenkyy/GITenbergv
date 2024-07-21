@@ -49249,3 +49249,5 @@ com.stylefeng.guns.common.exception.BussinessException: 没有此用户
 2018-04-08 14:28:06.416 DEBUG 16932 --- [http-nio-80-exec-8] c.s.g.c.p.dao.DictMapper.selectList      : ==>  Preparing: SELECT id AS id,num,pid,`name`,tips FROM dict WHERE (pid = ?) 
 2018-04-08 14:28:06.417 DEBUG 16932 --- [http-nio-80-exec-8] c.s.g.c.p.dao.DictMapper.selectList      : ==> Parameters: 29(Integer)
 2018-04-08 14:28:06.418 DEBUG 16932 --- [http-nio-80-exec-8] c.s.g.c.p.dao.DictMapper.selectList      : <==      Total: 2
+2018-04-08 14:39:26.473  INFO 16932 --- [SessionValidationThread-1] a.s.s.m.AbstractValidatingSessionManager : Validating all active sessions...
+2018-04-08 14:39:26.473  INFO 16932 --- [SessionValidationThread-1] a.s.s.m.AbstractValidatingSessionManager : Finished session validation.  No sessions were stopped.
