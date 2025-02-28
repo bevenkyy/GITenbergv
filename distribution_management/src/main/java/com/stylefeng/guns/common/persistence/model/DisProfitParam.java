@@ -13,10 +13,10 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-04-05
+ * @since 2018-05-30
  */
-@TableName("dis_profi_param")
-public class DisProfiParam extends Model<DisProfiParam> {
+@TableName("dis_profit_param")
+public class DisProfitParam extends Model<DisProfitParam> {
 
     private static final long serialVersionUID = 1L;
 
@@ -58,7 +58,6 @@ public class DisProfiParam extends Model<DisProfiParam> {
 	private String updateTime;
 	@TableField("add_time")
 	private String addTime;
-
 
 	public Integer getId() {
 		return id;
@@ -140,6 +139,7 @@ public class DisProfiParam extends Model<DisProfiParam> {
 		this.addTime = addTime;
 	}
 
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -147,7 +147,7 @@ public class DisProfiParam extends Model<DisProfiParam> {
 
 	@Override
 	public String toString() {
-		return "DisProfiParam{" +
+		return "DisProfitParam{" +
 			"id=" + id +
 			", disPlatformId=" + disPlatformId +
 			", disProMode=" + disProMode +

@@ -1,7 +1,7 @@
 package com.stylefeng.guns.modular.dist.controller;
 
 import com.stylefeng.guns.common.controller.BaseController;
-import com.stylefeng.guns.common.persistence.model.DisProfiParam;
+import com.stylefeng.guns.common.persistence.model.DisProfitParam;
 import com.stylefeng.guns.modular.dist.service.IDisProfiParamService;
 import com.stylefeng.guns.modular.dist.wapper.ProfiParamWarpper;
 import com.stylefeng.guns.modular.system.service.ISysDicService;
@@ -24,7 +24,7 @@ import java.util.Map;
  */
 @Controller
         @RequestMapping("/disProfiParam")
-public class DisProfiParamController extends BaseController {
+public class DisProfitParamController extends BaseController {
 
 
     @Autowired
@@ -78,7 +78,7 @@ public class DisProfiParamController extends BaseController {
      */
     @RequestMapping(value = "/add")
     @ResponseBody
-    public Object add(DisProfiParam  param) {
+    public Object add(DisProfitParam param) {
         disProfiParamService.save(param);
         return super.SUCCESS_TIP;
     }

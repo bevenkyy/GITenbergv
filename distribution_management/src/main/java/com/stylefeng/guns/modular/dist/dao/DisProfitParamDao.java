@@ -11,7 +11,7 @@ import java.util.Map;
  * @author huangpu
  * @Date 2018-04-06 11:33:32
  */
-public interface DisProfiParamDao {
+public interface DisProfitParamDao {
 
     List<Map<String, Object>> selectList(@Param("account") String account);
 

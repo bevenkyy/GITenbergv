@@ -1,6 +1,6 @@
 package com.stylefeng.guns.common.persistence.dao;
 
-import com.stylefeng.guns.common.persistence.model.DisProfiParam;
+import com.stylefeng.guns.common.persistence.model.DisProfitParam;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * </p>
  *
  * @author huangpu
- * @since 2018-04-05
+ * @since 2018-05-30
  */
-public interface DisProfiParamMapper extends BaseMapper<DisProfiParam> {
+public interface DisProfitParamMapper extends BaseMapper<DisProfitParam> {
 
 }

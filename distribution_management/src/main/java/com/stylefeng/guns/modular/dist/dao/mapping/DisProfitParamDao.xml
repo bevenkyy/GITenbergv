@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.stylefeng.guns.modular.dist.dao.DisProfiParamDao">
+<mapper namespace="com.stylefeng.guns.modular.dist.dao.DisProfitParamDao">
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="map">
@@ -19,7 +19,7 @@
     <select id="selectList" resultMap="BaseResultMap">
         SELECT p.`id`,p.`dis_platform_id`,
         e.`dic_value` AS dis_pro_mode,d.`dic_value` AS  dis_pro_level,f.`dic_value` AS dis_pro_type ,p.`add_time`,p.`dis_pro_value`,g.`dic_value` dis_user_type
-        FROM  `dis_profi_param` p
+        FROM  `dis_profit_param` p
         LEFT JOIN `sys_dic` d ON  d.`dic_no`=p.`dis_pro_level` AND d.`dic_type_no`='disProLevel'
         LEFT JOIN `sys_dic` e ON  e.`dic_no`=p.`dis_pro_mode` AND e.`dic_type_no`='disProMode'
         LEFT JOIN `sys_dic` f ON  f.`dic_no`=p.`dis_pro_type` AND f.`dic_type_no`='disProType'
