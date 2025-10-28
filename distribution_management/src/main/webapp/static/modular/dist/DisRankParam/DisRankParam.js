@@ -1,8 +1,8 @@
 /**
- * 参数设置管理初始化
+ * 段位积分管理初始化
  */
-var DisProfiParam = {
-    id: "DisProfiParamTable",	//表格id
+var DisRankParam = {
+    id: "DisRankParamTable",	//表格id
     seItem: null,		//选中的条目
     table: null,
     layerIndex: -1
@@ -11,14 +11,15 @@ var DisProfiParam = {
 /**
  * 初始化表格的列
  */
-DisProfiParam.initColumn = function () {
+DisRankParam.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
         {title: 'id', field: 'id', visible: false, align: 'center', valign: 'middle'},
+        {title: '名称', field: 'disRankName', visible: true, align: 'center', valign: 'middle'},
         {title: '平台id', field: 'disPlatformId', visible: true, align: 'center', valign: 'middle'},
         {title: '分润模型', field: 'disProMode', visible: true, align: 'center', valign: 'middle'},
         {title: '分润类别', field: 'disProType', visible: true, align: 'center', valign: 'middle'},
-        {title: '分润值', field: 'disProValue', visible: true, align: 'center', valign: 'middle'},
+        {title: '积分值', field: 'disIntegralValue', visible: true, align: 'center', valign: 'middle'},
         {title: '分润级别', field: 'disProLevel', visible: true, align: 'center', valign: 'middle'},
         {title: '用户类型', field: 'disUserType', visible: true, align: 'center', valign: 'middle'},
         {title: '用户段位', field: 'disUserRank', visible: true, align: 'center', valign: 'middle'},
@@ -29,58 +30,57 @@ DisProfiParam.initColumn = function () {
 /**
  * 检查是否选中
  */
-DisProfiParam.check = function () {
+DisRankParam.check = function () {
     var selected = $('#' + this.id).bootstrapTable('getSelections');
     if(selected.length == 0){
         Feng.info("请先选中表格中的某一记录！");
         return false;
     }else{
-        DisProfiParam.seItem = selected[0];
+        DisRankParam.seItem = selected[0];
         return true;
     }
 };
 
 /**
- * 点击添加参数设置
+ * 点击添加段位积分
  */
-DisProfiParam.openAddDisProfiParam = function () {
-
+DisRankParam.openAddDisRankParam = function () {
     var index = layer.open({
         type: 2,
-        title: '添加设置',
+        title: '添加段位积分',
         area: ['800px', '420px'], //宽高
         fix: false, //不固定
         maxmin: true,
-        content: Feng.ctxPath + '/disProfiParam/disProfiParam_add'
+        content: Feng.ctxPath + '/DisRankParam/DisRankParam_add'
     });
     this.layerIndex = index;
 };
 
 /**
- * 打开查看参数设置详情
+ * 打开查看段位积分详情
  */
-DisProfiParam.openDisProfiParamDetail = function () {
+DisRankParam.openDisRankParamDetail = function () {
     if (this.check()) {
         var index = layer.open({
             type: 2,
-            title: '参数设置详情',
+            title: '段位积分详情',
             area: ['800px', '420px'], //宽高
             fix: false, //不固定
             maxmin: true,
-            content: Feng.ctxPath + '/disProfiParam/disProfiParam_update/' + DisProfiParam.seItem.id
+            content: Feng.ctxPath + '/DisRankParam/DisRankParam_update/' + DisRankParam.seItem.id
         });
         this.layerIndex = index;
     }
 };
 
 /**
- * 删除参数设置
+ * 删除段位积分
  */
-DisProfiParam.delete = function () {
+DisRankParam.delete = function () {
     if (this.check()) {
-        var ajax = new $ax(Feng.ctxPath + "/disProfiParam/delete", function (data) {
+        var ajax = new $ax(Feng.ctxPath + "/DisRankParam/delete", function (data) {
             Feng.success("删除成功!");
-            DisProfiParam.table.refresh();
+            DisRankParam.table.refresh();
         }, function (data) {
             Feng.error("删除失败!" + data.responseJSON.message + "!");
         });
@@ -90,17 +90,17 @@ DisProfiParam.delete = function () {
 };
 
 /**
- * 查询参数设置列表
+ * 查询段位积分列表
  */
-DisProfiParam.search = function () {
+DisRankParam.search = function () {
     var queryData = {};
     queryData['condition'] = $("#condition").val();
-    DisProfiParam.table.refresh({query: queryData});
+    DisRankParam.table.refresh({query: queryData});
 };
 
 $(function () {
-    var defaultColunms = DisProfiParam.initColumn();
-    var table = new BSTable(DisProfiParam.id, "/disProfiParam/list", defaultColunms);
+    var defaultColunms = DisRankParam.initColumn();
+    var table = new BSTable(DisRankParam.id, "/DisRankParam/list", defaultColunms);
     table.setPaginationType("client");
-    DisProfiParam.table = table.init();
+    DisRankParam.table = table.init();
 });

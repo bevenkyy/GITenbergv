@@ -2,10 +2,9 @@ package com.stylefeng.guns.modular.dist.controller;
 
 import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.controller.BaseController;
-import com.stylefeng.guns.common.persistence.model.DisProfitParam;
+import com.stylefeng.guns.common.persistence.model.DisRankParam;
 import com.stylefeng.guns.core.shiro.ShiroKit;
-import com.stylefeng.guns.modular.dist.service.IDisProfiParamService;
-import com.stylefeng.guns.modular.dist.wapper.ProfiParamWarpper;
+import com.stylefeng.guns.modular.dist.service.IDisRankParamService;
 import com.stylefeng.guns.modular.system.service.ISysDicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,55 +18,59 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 参数设置控制器
+ * 段位积分控制器
  *
- * @author huangpu
- * @Date 2018-04-06 11:33:32
+ * @author xiaojiang
+ * @Date 2018-07-19 22:08:00
  */
 @Controller
-        @RequestMapping("/disProfiParam")
-public class DisProfitParamController extends BaseController {
+@RequestMapping("/DisRankParam")
+public class DisRankParamController extends BaseController {
 
+    private String PREFIX = "/dist/DisRankParam/";
 
     @Autowired
-    IDisProfiParamService disProfiParamService;
+    IDisRankParamService disRankParamService;
+
 
     @Autowired
     ISysDicService sysDicService;
 
-    private String PREFIX = "/dist/disProfiParam/";
-
     /**
-     * 跳转到参数设置首页
+     * 跳转到段位积分首页
      */
     @RequestMapping("")
     public String index() {
-        return PREFIX + "disProfiParam.html";
+        return PREFIX + "DisRankParam.html";
     }
 
     /**
-     * 跳转到添加参数设置
+     * 跳转到添加段位积分
      */
-    @RequestMapping("/disProfiParam_add")
-    public String disProfiParamAdd(Model model) {
+    @RequestMapping("/DisRankParam_add")
+    public String DisRankParamAdd(Model model) {
         model.addAttribute("disProMode",sysDicService.selectListByCode("disProMode"));
         model.addAttribute("disProType",sysDicService.selectListByCode("disProType"));
         model.addAttribute("disProLevel",sysDicService.selectListByCode("disProLevel"));
         model.addAttribute("disUserType",sysDicService.selectListByCode("disUserType"));
         model.addAttribute("disUserRank",sysDicService.selectListByCode("disUserRank"));
-        return PREFIX + "disProfiParam_add.html";
+        return PREFIX + "DisRankParam_add.html";
     }
 
     /**
-     * 跳转到修改参数设置
+     * 跳转到修改段位积分
      */
-    @RequestMapping("/disProfiParam_update/{disProfiParamId}")
-    public String disProfiParamUpdate(@PathVariable Integer disProfiParamId, Model model) {
-        return PREFIX + "disProfiParam_edit.html";
+    @RequestMapping("/DisRankParam_update/{DisRankParamId}")
+    public String DisRankParamUpdate(@PathVariable Integer DisRankParamId, Model model) {
+        DisRankParam disRankParam = disRankParamService.selectOne(DisRankParamId);
+        model.addAttribute("id",DisRankParamId);
+        model.addAttribute("disRankName",disRankParam.getDisRankName());
+        model.addAttribute("disIntegralValue",disRankParam.getDisIntegralValue());
+        return PREFIX + "DisRankParam_edit.html";
     }
 
     /**
-     * 获取参数设置列表
+     * 获取段位积分列表
      */
     @RequestMapping(value = "/list")
     @ResponseBody
@@ -76,51 +79,47 @@ public class DisProfitParamController extends BaseController {
         if(ShiroKit.hasRole(Const.ADMIN_NAME)){
             account=null;
         }
-        List<Map<String, Object>> list=disProfiParamService.selectList(account);
-        return super.warpObject(new ProfiParamWarpper(list));
+        List<Map<String, Object>> list = disRankParamService.selectList(account);
+        return list ;
     }
 
     /**
-     * 新增参数设置
+     * 新增段位积分
      */
     @RequestMapping(value = "/add")
     @ResponseBody
-    public Object add(DisProfitParam param) {
+    public Object add(DisRankParam param) {
         String account= ShiroKit.getUser().getAccount();
         if(!ShiroKit.hasRole(Const.ADMIN_NAME)){
             param.setDisPlatformId(account);
         }
-        disProfiParamService.save(param);
+        disRankParamService.save(param);
         return super.SUCCESS_TIP;
-    }
-    @RequestMapping(value = "/protype")
-    @ResponseBody
-    public Object protype() {
-        return sysDicService.selectListByCode("disProType");
     }
 
     /**
-     * 删除参数设置
+     * 删除段位积分
      */
     @RequestMapping(value = "/delete")
     @ResponseBody
     public Object delete(@RequestParam int id) {
-        disProfiParamService.delete(id);
+        disRankParamService.delete(id);
         return SUCCESS_TIP;
     }
 
 
     /**
-     * 修改参数设置
+     * 修改段位积分
      */
     @RequestMapping(value = "/update")
     @ResponseBody
-    public Object update() {
+    public Object update(DisRankParam param) {
+        disRankParamService.update(param);
         return super.SUCCESS_TIP;
     }
 
     /**
-     * 参数设置详情
+     * 段位积分详情
      */
     @RequestMapping(value = "/detail")
     @ResponseBody

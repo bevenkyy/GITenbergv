@@ -13,13 +13,16 @@ import java.io.Serializable;
  * </p>
  *
  * @author huangpu
- * @since 2018-07-19
+ * @since 2018-07-20
  */
-@TableName("dis_profit_param")
-public class DisProfitParam extends Model<DisProfitParam> {
+@TableName("dis_rank_param")
+public class DisRankParam extends Model<DisRankParam> {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 主键
+     */
 	@TableId(value="id", type= IdType.AUTO)
 	private Integer id;
     /**
@@ -38,10 +41,10 @@ public class DisProfitParam extends Model<DisProfitParam> {
 	@TableField("dis_pro_type")
 	private String disProType;
     /**
-     * 分润值
+     * 积分值
      */
-	@TableField("dis_pro_value")
-	private String disProValue;
+	@TableField("dis_integral_value")
+	private String disIntegralValue;
     /**
      * 从下往上对应的级别关系
      */
@@ -68,15 +71,15 @@ public class DisProfitParam extends Model<DisProfitParam> {
 	@TableField("add_time")
 	private String addTime;
     /**
-     * 交易方式(分润或者提现)
-     */
-	@TableField("dist_trade_mode")
-	private String distTradeMode;
-    /**
      * 用户段位（青铜等）
      */
 	@TableField("dis_user_rank")
 	private String disUserRank;
+    /**
+     * 段位积分名称
+     */
+	@TableField("dis_rank_name")
+	private String disRankName;
 
 
 	public Integer getId() {
@@ -111,12 +114,12 @@ public class DisProfitParam extends Model<DisProfitParam> {
 		this.disProType = disProType;
 	}
 
-	public String getDisProValue() {
-		return disProValue;
+	public String getDisIntegralValue() {
+		return disIntegralValue;
 	}
 
-	public void setDisProValue(String disProValue) {
-		this.disProValue = disProValue;
+	public void setDisIntegralValue(String disIntegralValue) {
+		this.disIntegralValue = disIntegralValue;
 	}
 
 	public String getDisProLevel() {
@@ -159,20 +162,20 @@ public class DisProfitParam extends Model<DisProfitParam> {
 		this.addTime = addTime;
 	}
 
-	public String getDistTradeMode() {
-		return distTradeMode;
-	}
-
-	public void setDistTradeMode(String distTradeMode) {
-		this.distTradeMode = distTradeMode;
-	}
-
 	public String getDisUserRank() {
 		return disUserRank;
 	}
 
 	public void setDisUserRank(String disUserRank) {
 		this.disUserRank = disUserRank;
+	}
+
+	public String getDisRankName() {
+		return disRankName;
+	}
+
+	public void setDisRankName(String disRankName) {
+		this.disRankName = disRankName;
 	}
 
 	@Override
@@ -182,19 +185,19 @@ public class DisProfitParam extends Model<DisProfitParam> {
 
 	@Override
 	public String toString() {
-		return "DisProfitParam{" +
+		return "DisRankParam{" +
 			"id=" + id +
 			", disPlatformId=" + disPlatformId +
 			", disProMode=" + disProMode +
 			", disProType=" + disProType +
-			", disProValue=" + disProValue +
+			", disIntegralValue=" + disIntegralValue +
 			", disProLevel=" + disProLevel +
 			", disUserType=" + disUserType +
 			", isDelete=" + isDelete +
 			", updateTime=" + updateTime +
 			", addTime=" + addTime +
-			", distTradeMode=" + distTradeMode +
 			", disUserRank=" + disUserRank +
+			", disRankName=" + disRankName +
 			"}";
 	}
 }
