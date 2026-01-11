@@ -9,14 +9,14 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ * 系统积分记录表
  * </p>
  *
  * @author huangpu
- * @since 2018-07-22
+ * @since 2018-09-26
  */
-@TableName("dis_sys_integral_record")
-public class DisSysIntegralRecord extends Model<DisSysIntegralRecord> {
+@TableName("dis_rank_integral_record")
+public class DisRankIntegralRecord extends Model<DisRankIntegralRecord> {
 
     private static final long serialVersionUID = 1L;
 
@@ -40,6 +40,11 @@ public class DisSysIntegralRecord extends Model<DisSysIntegralRecord> {
      */
 	@TableField("is_use")
 	private String isUse;
+    /**
+     * 是否过期(Y:已过期，N未过期)
+     */
+	@TableField("is_expire")
+	private String isExpire;
     /**
      * 使用前积分
      */
@@ -117,6 +122,14 @@ public class DisSysIntegralRecord extends Model<DisSysIntegralRecord> {
 
 	public void setIsUse(String isUse) {
 		this.isUse = isUse;
+	}
+
+	public String getIsExpire() {
+		return isExpire;
+	}
+
+	public void setIsExpire(String isExpire) {
+		this.isExpire = isExpire;
 	}
 
 	public Integer getBeforeIntegral() {
@@ -198,11 +211,12 @@ public class DisSysIntegralRecord extends Model<DisSysIntegralRecord> {
 
 	@Override
 	public String toString() {
-		return "DisSysIntegralRecord{" +
+		return "DisRankIntegralRecord{" +
 			"id=" + id +
 			", disUserId=" + disUserId +
 			", sysIntegral=" + sysIntegral +
 			", isUse=" + isUse +
+			", isExpire=" + isExpire +
 			", beforeIntegral=" + beforeIntegral +
 			", afterIntegral=" + afterIntegral +
 			", expireTime=" + expireTime +
