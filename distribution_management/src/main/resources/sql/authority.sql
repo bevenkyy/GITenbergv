@@ -384,7 +384,7 @@ CREATE TABLE `sys_job` (
 
 /*Data for the table `sys_job` */
 
-insert  into `sys_job`(`id`,`job_name`,`job_group`,`job_cron`,`job_class_path`,`job_data_map`,`job_status`,`job_describe`) values (22,'test','test','*/1 * * * * ?','com.stylefeng.guns.modular.system.task.TestTask1',NULL,1,'a job a'),(23,'垂直等级升级','dist','0 0 23 L * ?','com.stylefeng.guns.modular.dist.task.RankTask',NULL,1,'等级升级');
+insert  into `sys_job`(`id`,`job_name`,`job_group`,`job_cron`,`job_class_path`,`job_data_map`,`job_status`,`job_describe`) values (22,'test','test','*/1 * * * * ?','com.stylefeng.guns.modular.system.task.TestTask1',NULL,1,'a job a'),(23,'会员垂直等级升级','dist','0 0 23 L * ?','com.stylefeng.guns.modular.dist.task.MemberRankTask',NULL,1,'等级升级');
 
 /*Table structure for table `test` */
 

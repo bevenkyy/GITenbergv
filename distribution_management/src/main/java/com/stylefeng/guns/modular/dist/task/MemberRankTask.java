@@ -2,6 +2,7 @@ package com.stylefeng.guns.modular.dist.task;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.stylefeng.guns.common.constant.dist.IdentityStatus;
 import com.stylefeng.guns.common.constant.dist.UserRankStatus;
 import com.stylefeng.guns.common.persistence.dao.*;
 import com.stylefeng.guns.common.persistence.model.*;
@@ -17,9 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  *积分任务调度
@@ -27,10 +26,10 @@ import java.util.concurrent.atomic.AtomicReference;
  * 在当前时间下 所有的没有过期的 并且没有使用过的积分进行计算，给用户分配级别
  * 并且将对应的积分设置成已过期
  */
-public class RankTask implements BaseJob {
+public class MemberRankTask implements BaseJob {
 
 
-    private Logger logger =  LoggerFactory.getLogger(RankTask.class);
+    private Logger logger =  LoggerFactory.getLogger(MemberRankTask.class);
 
     @Resource
     DisRankIntegralRecordMapper disRankIntegralRecordMapper;
@@ -56,7 +55,8 @@ public class RankTask implements BaseJob {
     public void execute(JobExecutionContext context) throws JobExecutionException {
         //查询大于0的积分
         Wrapper<DisMemberInfo> wrapper=new EntityWrapper();
-        wrapper.gt("rank_integral","0");
+        wrapper.gt("rank_integral","0")
+                .eq("type",IdentityStatus.USER_STATUS.getStatus());
         List<DisMemberInfo> memberInfoList=disMemberInfoMapper.selectList(wrapper);
         if(memberInfoList!=null){
             memberInfoList.forEach((memberInfo)->{
@@ -75,6 +75,7 @@ public class RankTask implements BaseJob {
                 }
                 //根据积分判断对应的等级
                 Wrapper<DisUpgradeParam> upgradeParam = new EntityWrapper<>();
+                upgradeParam.eq("identity_type", IdentityStatus.USER_STATUS.getStatus());
                 List<DisUpgradeParam> upgradeParams = disUpgradeParamMapper.selectList(upgradeParam);
                 String rank="";
                 if(upgradeParams!=null){
